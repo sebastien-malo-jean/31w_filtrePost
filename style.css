@@ -3,5 +3,7 @@
 }
 
 .contenu__restapi {
+  display: flex;
+  flex-direction: column;
   line-height: 1.5rem;
 }/*# sourceMappingURL=style.css.map */

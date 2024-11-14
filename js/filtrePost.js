@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   console.log("Connexion reussi plugin filtrePost");
   let filtre__bouton = document.querySelectorAll(".filtre__bouton button");
-  console.log(filtre__bouton);
+  // console.log(filtre__bouton);
   for (const element of filtre__bouton) {
     element.addEventListener("click", (evnt) => {
       const categorie = evnt.target.dataset.id;
@@ -43,12 +43,22 @@ document.addEventListener("DOMContentLoaded", () => {
         // Pour chaque article, crée un élément HTML pour l’afficher
         articles.forEach((article) => {
           // Crée un nouvel élément div pour chaque article
-          const item = document.createElement("div");
+          const item = document.createElement("a");
           item.className = "cours-item"; // Ajoute une classe pour la mise en forme
-
+          item.href = article.link;
           const titre = article.title;
           // console.log(titre.rendered);
-          item.textContent = titre.rendered;
+
+          if (/^\d/.test(titre.rendered)) {
+            let titreComplet = titre.rendered;
+            let sigle = titreComplet.slice(0, 7);
+            let titreCour = titreComplet.slice(8, stripos(titreComplet, "("));
+            // Ajoute le titre de l’article dans le div
+            item.textContent = titreCour + " " + sigle;
+          } else {
+            // Ajoute le titre de l’article dans le div
+            item.textContent = titre.rendered;
+          }
           // Ajoute le div créé dans le conteneur des cours
           conteneurCours.appendChild(item);
         });
