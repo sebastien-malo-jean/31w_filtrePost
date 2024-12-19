@@ -14,14 +14,14 @@ function charger_scripts_css(){
     wp_enqueue_style(
         "filtrePost",        
         plugin_dir_url(__FILE__) . "/style.css",
-        array(),
+        [],
         $version_css
     ) ;  
  
     wp_enqueue_script(
         "filtrePost",      
         plugin_dir_url(__FILE__) . "/js/filtrePost.js",
-        array(),
+        [],
         $version_js,
         true
     )  ;
@@ -29,7 +29,7 @@ function charger_scripts_css(){
 add_action("wp_enqueue_scripts", "charger_scripts_css");
 
 function genere_boutons() {
-$categories = get_categories();
+$categories = get_categories(array('exclude' => array(10,14)));
 $content = "";
 
 foreach ($categories as $element) {
@@ -43,4 +43,4 @@ return '<div class="filtre__bouton">' . $content . '</div>
 
 
 
-add_shortcode("extraire_cours", "genere_boutons");
+add_shortcode("extraire_categorie", "genere_boutons");
